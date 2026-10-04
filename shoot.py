@@ -1,15 +1,13 @@
 import random
 
-
 def get_cpu_choice():
     cpu_choice = random.choice(["rock", "paper", "scissors"])
     return cpu_choice
 
-
 def get_player_choice():
     while True:
-        player_choice = input("Choose rock, paper, or scissors: ")
-        player_choice = player_choice.lower()
+        player_choice = input("Player choice (rock, paper, scissors): ")
+        player_choice.lower()
 
         if player_choice == "rock" or player_choice == "paper" or player_choice == "scissors":
             return player_choice
@@ -30,13 +28,13 @@ def check_winner(cpu_choice, player_choice):
             winner = "PLAYER"
         else:
             winner = "CPU"
-    elif player_choice == "paper":
-        winner = "CPU"
-    else:
-        winner = "PLAYER"
+    elif cpu_choice == "scissors":
+        if player_choice == "rock":
+            winner = "PLAYER"
+        else:
+            winner = "CPU"
 
     return winner
-
 
 def play_round():
     cpu_choice = get_cpu_choice()
@@ -44,32 +42,28 @@ def play_round():
     winner = check_winner(cpu_choice, player_choice)
 
     print("CPU chose:", cpu_choice)
-    print("You chose:", player_choice)
+    print("Player chose:", player_choice)
     print("Winner:", winner)
 
     return winner
 
-
 player_wins = 0
 cpu_wins = 0
 ties = 0
-
 while player_wins < 3 and cpu_wins < 3:
     winner = play_round()
-
     if winner == "PLAYER":
-        player_wins += 1
+        player_wins = player_wins + 1
     elif winner == "CPU":
-        cpu_wins += 1
+        cpu_wins = cpu_wins + 1
     else:
-        ties += 1
-
+        ties = ties + 1
     print("Player wins:", player_wins)
     print("CPU wins:", cpu_wins)
     print("Ties:", ties)
-    print()
 
 if player_wins == 3:
-    print("Overall winner: PLAYER!")
+    print("Overall winner: PLAYER")
 else:
-    print("Overall winner: CPU!")
+    print("Overall winner: CPU")
+
